@@ -27,6 +27,13 @@ public class LoginTest {
         userApiSteps.userCreate(userCreateAndEditRequest);
     }
 
+
+    @Before
+    public void setUp() {
+        Browser browser = new Browser();
+        driver = browser.getWebDriver(Resources.browserName);
+    }
+
     @After
     public void tearDown() {
         driver.quit();
@@ -43,8 +50,6 @@ public class LoginTest {
     @DisplayName("Вход на главной странице по кнопке Войти в аккаунт")
     @Description("Проверка возможности входа в аккаунт после нажатия на кнопку Войти в аккаунт на главной странице")
     public void LoginMainPageLoginButton() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.mainURL);
 
         MainPage mainPage = new MainPage(driver);
@@ -60,8 +65,6 @@ public class LoginTest {
     @DisplayName("Вход на главной странице по кнопке Личный кабинет")
     @Description("Проверка возможности входа в аккаунт после нажатия на кнопку Личный кабинет на главной странице")
     public void LoginMainPageProfileButton() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.mainURL);
 
         MainPage mainPage = new MainPage(driver);
@@ -77,8 +80,6 @@ public class LoginTest {
     @DisplayName("Вход со страницы регистрации")
     @Description("Проверка возможности входа в аккаунт после нажатия на кнопку Войти на странице регистрации")
     public void LoginRegisterPageLoginButton() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.registerURL);
 
         RegisterPage registerPage = new RegisterPage(driver);
@@ -95,8 +96,6 @@ public class LoginTest {
     @DisplayName("Вход со страницы восстановления пароля")
     @Description("Проверка возможности входа в аккаунт после нажатия на кнопку Войти на странице восстановления пароля")
     public void LoginForgotPasswordPageLoginButton() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.forgotPasswordURL);
 
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driver);
