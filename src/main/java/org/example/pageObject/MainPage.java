@@ -22,12 +22,6 @@ public class MainPage {
     private By sectionSauce = By.xpath(".//span[text()='Соусы']");
     // раздел Начинки
     private By sectionTopping = By.xpath(".//span[text()='Начинки']");
-    // заголовок Булки
-    private By headerBun = By.xpath(".//h2[text()='Булки']");
-    // заголовок Соусы
-    private By headerSauce = By.xpath(".//h2[text()='Соусы']");
-    // заголовок Начинки
-    private By headerTopping = By.xpath(".//h2[text()='Начинки']");
 
     public MainPage(WebDriver driver){
         this.driver = driver;
@@ -97,46 +91,12 @@ public class MainPage {
         }
     }
 
-    // Проверка отображения заголовка Булки
+    // Возвращает выбранный элемент в конструкторе
     @Step
-    public boolean headerBunIsDisplayed() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(headerBun));
-        try {
-            return driver.findElement(headerBun).isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
+    public String returnSelectedSection(String sectionName) {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.textToBe(By.xpath(".//div[contains(@class, 'current')]/span"), sectionName));
+        return driver.findElement(By.xpath(".//div[contains(@class, 'current')]/span")).getText();
     }
 
-    // Проверка отображения заголовка Соусы
-    @Step
-    public boolean headerSauceIsDisplayed() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(headerSauce));
-        try {
-            return driver.findElement(headerSauce).isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    // Проверка отображения заголовка Начинки
-    @Step
-    public boolean headerToppingIsDisplayed() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(headerTopping));
-        try {
-            return driver.findElement(headerTopping).isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    // Скролл до появления заголовка Начинки
-    public void constructorScrollDown() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(headerTopping));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(headerTopping));
-    }
 }
