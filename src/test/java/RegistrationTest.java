@@ -6,6 +6,7 @@ import org.example.api.UserApiSteps;
 import org.example.api.UserLoginRequest;
 import org.example.pageObject.RegisterPage;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -16,6 +17,12 @@ public class RegistrationTest {
 
     private WebDriver driver;
     private boolean skipUserDelete = false;
+
+    @Before
+    public void setUp() {
+        Browser browser = new Browser();
+        driver = browser.getWebDriver(Resources.browserName);
+    }
 
     @After
     public void tearDown() {
@@ -35,8 +42,6 @@ public class RegistrationTest {
     @DisplayName("Успешная регистрация")
     @Description("Проверка возможности регистрации пользователя с валидными данными")
     public void SuccessfulRegistrationWithValidData() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.registerURL);
 
         RegisterPage registerPage = new RegisterPage(driver);
@@ -56,8 +61,6 @@ public class RegistrationTest {
     @Description("Проверка ошибки при попытке регистрации пользователя с паролем менее 6 символов")
     public void FailedRegistrationWithPasswordLessThen6Symbols() {
         skipUserDelete = true;
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.registerURL);
 
         RegisterPage registerPage = new RegisterPage(driver);
