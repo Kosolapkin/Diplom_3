@@ -4,14 +4,21 @@ import org.example.Browser;
 import org.example.Resources;
 import org.example.pageObject.MainPage;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class MainPageTest {
 
     private WebDriver driver;
+
+    @Before
+    public void setUp() {
+        Browser browser = new Browser();
+        driver = browser.getWebDriver(Resources.browserName);
+    }
 
     @After
     public void tearDown() {
@@ -22,43 +29,44 @@ public class MainPageTest {
     @DisplayName("Переход к разделу Начинки")
     @Description("Проверка возможности перехода к разделу Начинки на главной странице")
     public void SwitchingToSectionTopping() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.mainURL);
 
         MainPage mainPage = new MainPage(driver);
         mainPage.sectionToppingClick();
-        assertTrue("Не произошел переход к разделу Начинки", mainPage.headerToppingIsDisplayed());
 
+        String expectedText = "Начинки";
+        String actualText = mainPage.returnSelectedSection(expectedText);
+        assertEquals("Не произошел переход к нужному разделу", expectedText, actualText);
     }
 
     @Test
     @DisplayName("Переход к разделу Соусы")
     @Description("Проверка возможности перехода к разделу Соусы на главной странице")
     public void SwitchingToSectionSauce() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.mainURL);
 
         MainPage mainPage = new MainPage(driver);
+        mainPage.sectionToppingClick();
         mainPage.sectionSauceClick();
-        assertTrue("Не произошел переход к разделу Соусы", mainPage.headerSauceIsDisplayed());
 
+        String expectedText = "Соусы";
+        String actualText = mainPage.returnSelectedSection(expectedText);
+        assertEquals("Не произошел переход к нужному разделу", expectedText, actualText);
     }
 
     @Test
     @DisplayName("Переход к разделу Булки")
     @Description("Проверка возможности перехода к разделу Булки на главной странице")
     public void SwitchingToSectionBun() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.mainURL);
 
         MainPage mainPage = new MainPage(driver);
-        mainPage.constructorScrollDown();
+        mainPage.sectionToppingClick();
         mainPage.sectionBunClick();
-        assertTrue("Не произошел переход к разделу Булки", mainPage.headerBunIsDisplayed());
 
+        String expectedText = "Булки";
+        String actualText = mainPage.returnSelectedSection(expectedText);
+        assertEquals("Не произошел переход к нужному разделу", expectedText, actualText);
     }
 
 }
