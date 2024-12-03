@@ -26,6 +26,12 @@ public class ProfileTest {
         userApiSteps.userCreate(userCreateAndEditRequest);
     }
 
+    @Before
+    public void setUp() {
+        Browser browser = new Browser();
+        driver = browser.getWebDriver(Resources.browserName);
+    }
+
     @After
     public void tearDown() {
         driver.quit();
@@ -42,8 +48,6 @@ public class ProfileTest {
     @DisplayName("Переход в личный кабинет")
     @Description("Проверка возможности входа в личный кабинет после нажатия на кнопку Личный кабинет на главной странице")
     public void SwitchingToProfileFromMain() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.loginURL);
 
         LoginPage loginPage = new LoginPage(driver);
@@ -60,8 +64,6 @@ public class ProfileTest {
     @DisplayName("Переход в конструктор через кнопку Конструктор")
     @Description("Проверка возможности перехода к конструктору после нажатия на кнопку Конструктор в профиле пользователя")
     public void SwitchingToConstructorAfterConstructorButtonClick() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.loginURL);
 
         LoginPage loginPage = new LoginPage(driver);
@@ -79,8 +81,6 @@ public class ProfileTest {
     @DisplayName("Переход в конструктор через Логотип")
     @Description("Проверка возможности перехода к конструктору после нажатия на Логотип в профиле пользователя")
     public void SwitchingToConstructorAfterLogoClick() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.loginURL);
 
         LoginPage loginPage = new LoginPage(driver);
@@ -98,8 +98,6 @@ public class ProfileTest {
     @DisplayName("Выход из аккаунта")
     @Description("Проверка возможности выйти из аккаунта после нажатия на кнопку Выход в профиле пользователя")
     public void LogoutAfterExitButtonClick() {
-        Browser browser = new Browser();
-        driver = browser.getWebDriver(Resources.browserName);
         driver.get(Resources.loginURL);
 
         LoginPage loginPage = new LoginPage(driver);
